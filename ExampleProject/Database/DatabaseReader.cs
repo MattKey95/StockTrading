@@ -37,10 +37,12 @@ namespace ExampleProject.Database
                 using (SqlCommand cmd = new SqlCommand(query, cnn))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
-                    
-                    while (reader.Read())
+                    if (reader.FieldCount != 0)
                     {
-                        ResultList.Add(ConstructObject<T>((IDataRecord) reader));
+                        while (reader.Read())
+                        {
+                            ResultList.Add(ConstructObject<T>((IDataRecord) reader));
+                        }
                     }
                 }
                 cnn.Close();
@@ -60,7 +62,7 @@ namespace ExampleProject.Database
                     if (c.Name == record.GetName(i))
                     {
                         PropertyInfo prop = type.GetProperty(c.Name);
-                        if (prop != null)
+                        if (prop != null && !record.IsDBNull(i))
                         {
                             prop.SetValue(TObject, record[i]);
                         }

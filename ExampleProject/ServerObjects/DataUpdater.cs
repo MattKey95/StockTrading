@@ -8,7 +8,7 @@ namespace ExampleProject.Database
 {
     public class DataUpdater
     {
-        public List<String> Tickers = new List<string>() { "AAPL", "GOOG", "GOOGL", "YHOO", "TSLA", "INTC", "AMZN", "BIDU", "ORCL", "MSFT", "ORCL", "ATVI", "NVDA", "GME", "LNKD", "NFLX" };
+        public List<String> Tickers = new List<string>() { "AAPL", "GOOG", "GOOGL", "TSLA", "INTC", "AMZN", "BIDU", "ORCL", "MSFT", "ORCL", "ATVI", "NVDA", "GME", "NFLX" };
 
 
         private static DataUpdater _updater;
@@ -41,9 +41,9 @@ namespace ExampleProject.Database
 
             string query = String.Format("SELECT MAX(DayDate) AS DayDate FROM HistoricalData WHERE Ticker=\'{0}\'", Ticker);
             
-            List<ServerHistoricalStockObject> result = DatabaseReader.Reader.ReadFromDatabase<ServerHistoricalStockObject>(query);
+            List<HistoricalStockObject> result = DatabaseReader.Reader.ReadFromDatabase<HistoricalStockObject>(query);
 
-            if (result.Count == 0 || DateTime.Parse(result[0].Date) < DateTime.Parse(yesterday))
+            if (result.Count == 0 || DateTime.Parse(result[0].DayDate) < DateTime.Parse(yesterday))
             {
                 Console.WriteLine("Updating "+Ticker);
                 List<ServerHistoricalStockObject> list = JsonToStockObject.Json.CreateHistoricalStockObjects(Ticker, "1m");
