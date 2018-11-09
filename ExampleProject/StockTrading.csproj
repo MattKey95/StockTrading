@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ServerObjects\DataUpdater.cs" />
+    <Compile Include="ServerObjects\IEXTradingObjects\ServerHistoricalStockObject.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -103,9 +105,9 @@
     <Compile Include="Database\DatabaseWriter.cs" />
     <Compile Include="Database\Helper.cs" />
     <Compile Include="Database\IEXTradingObjects\HistoricalStockObject.cs" />
-    <Compile Include="Database\IEXTradingAPICommunicator.cs" />
-    <Compile Include="Database\JsonToStockObject.cs" />
-    <Compile Include="Database\StockObjectToDatabase.cs" />
+    <Compile Include="ServerObjects\IEXTradingAPICommunicator.cs" />
+    <Compile Include="ServerObjects\JsonToStockObject.cs" />
+    <Compile Include="ServerObjects\StockObjectToDatabase.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -133,15 +135,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

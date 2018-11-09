@@ -14,7 +14,7 @@ namespace ExampleProject.ViewModels
 {
     public class ShellViewModel : Screen
     {
-        public List<String> _tickers = new List<string>() { "APPL","GOOG","GOOGL","YHOO","TSLA","INTC","AMZN","BIDU","ORCL","MSFT","ORCL","ATVI","NVDA","GME","LNKD","NFLX" };
+        public List<String> _tickers = new List<string>() { "AAPL","GOOG","GOOGL","YHOO","TSLA","INTC","AMZN","BIDU","ORCL","MSFT","ORCL","ATVI","NVDA","GME","LNKD","NFLX" };
         
         public List<string> Tickers
         {

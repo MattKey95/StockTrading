@@ -73,15 +73,22 @@ namespace ExampleProject.Database
                     {
                         using (SqlCommand cmd = new SqlCommand(q, cnn))
                         {
-                            int value = cmd.ExecuteNonQuery();
-                            if (value == 0)
+                            try
                             {
-                                Console.WriteLine("FAILED!");
-                                return Helper.Errors.DBQUERYFAIL;
+                                int value = cmd.ExecuteNonQuery();
+                                if (value == 0)
+                                {
+                                    Console.WriteLine("FAILED!");
+                                    return Helper.Errors.DBQUERYFAIL;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("SUCCESS!");
+                                }
                             }
-                            else
+                            catch (Exception)
                             {
-                                Console.WriteLine("SUCCESS!");
+
                             }
                         }
                     }

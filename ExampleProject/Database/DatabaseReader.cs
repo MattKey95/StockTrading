@@ -37,9 +37,10 @@ namespace ExampleProject.Database
                 using (SqlCommand cmd = new SqlCommand(query, cnn))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
+                    
                     while (reader.Read())
                     {
-                        ResultList.Add(ConstructObject<T>((IDataRecord)reader));
+                        ResultList.Add(ConstructObject<T>((IDataRecord) reader));
                     }
                 }
                 cnn.Close();
