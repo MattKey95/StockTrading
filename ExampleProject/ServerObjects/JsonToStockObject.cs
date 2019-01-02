@@ -32,9 +32,9 @@ namespace ExampleProject.Database
                 list = JsonConvert.DeserializeObject<List<ServerHistoricalStockObject>>(
                     IEXTradingAPICommunicator.GetHistoricalData(Ticker, Time));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine("Exception handeled: "+e);
             }
 
             foreach(ServerHistoricalStockObject h in list)

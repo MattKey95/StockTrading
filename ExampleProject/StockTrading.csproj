@@ -86,6 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\DataRecordToStockObject.cs" />
     <Compile Include="ServerObjects\DataUpdater.cs" />
     <Compile Include="ServerObjects\IEXTradingObjects\ServerHistoricalStockObject.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

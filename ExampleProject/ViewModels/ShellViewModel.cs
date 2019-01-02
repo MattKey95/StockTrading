@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using ExampleProject.Database;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Threading;
 
 namespace ExampleProject.ViewModels
 {
     public class ShellViewModel : Screen
     {
-        public List<String> _tickers = new List<string>() { "AAPL","GOOG","GOOGL","YHOO","TSLA","INTC","AMZN","BIDU","ORCL","MSFT","ORCL","ATVI","NVDA","GME","LNKD","NFLX" };
+        public List<String> _tickers = new List<string>() { "AAPL","GOOG","GOOGL", "TSLA","INTC","AMZN","BIDU","ORCL","MSFT","ORCL","ATVI","NVDA","GME","NFLX" };
         
         public List<string> Tickers
         {
@@ -44,22 +48,35 @@ namespace ExampleProject.ViewModels
 
         public void UpdateGraph()
         {
+            List<object[]> list = new List<object[]>();
+            List<HistoricalStockObject> objects = new List<HistoricalStockObject>();
+            
+                
             Num.Clear();
-            string query = String.Format("SELECT * FROM HistoricalData WHERE Ticker=\'{0}\'", Selected);
-            Console.WriteLine(query);
-            List<HistoricalStockObject> list = DatabaseReader.Reader.ReadFromDatabase<HistoricalStockObject>(query);
+            Task.Run(() =>
+            {
+                string query = String.Format("SELECT * FROM HistoricalData WHERE Ticker=\'{0}\'", Selected);
+                Console.WriteLine(query);
+                list = DatabaseReader.Reader.ReadFromDatabase(query);
+                objects = DataRecordToStockObject.Converter.ToHistorical(list);
+            });
 
             LineSeries temp = new LineSeries
             {
-                Values = new ChartValues<double>() {}
+                Values = new ChartValues<double>() { }
             };
-
-            foreach (var l in list)
+            
+            foreach (var l in objects)
             {
                 temp.Values.Add(l.DayClose);
             }
             
             Num.Add(temp);
+        }
+
+        public void UpdateStocks()
+        {
+            DataUpdater.Updater.UpdateHistoricalData();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ExampleProject.Views
     {
         public ShellView()
         {
-            DataUpdater.Updater.UpdateAllStocks();
+            //DataUpdater.Updater.UpdateAllStocks();
             InitializeComponent();
         }
     }

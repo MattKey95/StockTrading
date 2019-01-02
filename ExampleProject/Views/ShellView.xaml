@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ExampleProject.Views"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
+        Title="ShellView" Height="500" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -16,10 +16,13 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <ListBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=Tickers, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Selected}" ></ListBox>
         <lvc:CartesianChart Grid.Column="2" Grid.Row="1"  Series="{Binding Path=Num}" />
+
+        <Button Grid.Column="1" Grid.Row="2" x:Name="UpdateStocks">Update Stocks</Button>
     </Grid>
 </Window>

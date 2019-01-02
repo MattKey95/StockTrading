@@ -71,5 +71,32 @@ namespace ExampleProject.Database
             }
             return TObject;
         }
+
+        public List<object[]> ReadFromDatabase(string query)
+        {
+            List<object[]> ResultList = new List<object[]>();
+
+            string connetionString = Helper.GetConnectionString("StockDB");
+            using (SqlConnection cnn = new SqlConnection(connetionString))
+            {
+                cnn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, cnn))
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.FieldCount != 0)
+                    {
+                        while (reader.Read())
+                        {
+                            object[] d = new object[reader.FieldCount];
+                            reader.GetValues(d);
+                            ResultList.Add(d);
+                        }
+                    }
+                }
+                cnn.Close();
+            }
+
+            return ResultList;
+        }
     }
 }

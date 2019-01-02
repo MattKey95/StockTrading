@@ -37,7 +37,7 @@ namespace ExampleProject.Database
 
                 QueryList.Add(sql);
             }
-
+            Console.WriteLine("Passing List through");
             DatabaseWriter.Writer.RunQueryList(QueryList);
         }
     }

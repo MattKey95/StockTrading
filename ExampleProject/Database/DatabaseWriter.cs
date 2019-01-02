@@ -41,6 +41,7 @@ namespace ExampleProject.Database
                         if (value == 0)
                         {
                             Console.WriteLine("FAILED!");
+                            Console.WriteLine(query);
                             return Helper.Errors.DBQUERYFAIL;
                         }
                         else

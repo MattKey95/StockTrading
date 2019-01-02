@@ -8,7 +8,11 @@ namespace ExampleProject.Database
 {
     public class DataUpdater
     {
-        public List<String> Tickers = new List<string>() { "AAPL", "GOOG", "GOOGL", "TSLA", "INTC", "AMZN", "BIDU", "ORCL", "MSFT", "ORCL", "ATVI", "NVDA", "GME", "NFLX" };
+        public List<String> Tickers = new List<string>()
+        {
+            "AAPL", "GOOG", "GOOGL", "TSLA", "INTC", "AMZN", "BIDU", "ORCL", "MSFT", "ORCL", "ATVI", "NVDA", "GME",
+            "NFLX"
+        };
 
 
         private static DataUpdater _updater;
@@ -26,30 +30,26 @@ namespace ExampleProject.Database
             }
         }
 
-        public void UpdateAllStocks()
+
+        public void UpdateHistoricalData()
         {
+            /*
+            string deleteQuery = "DELETE FROM HistoricalData";
+            DatabaseWriter.Writer.RunQuery(deleteQuery);
+
+            List<List<ServerHistoricalStockObject>> data = new List<List<ServerHistoricalStockObject>>();
             foreach (var t in Tickers)
             {
-                DataUpdater.Updater.UpdateHistoricalData(t);
+                List<ServerHistoricalStockObject> temp = JsonToStockObject.Json.CreateHistoricalStockObjects(t, "5y");
+                data.Add(temp);
             }
-        }
 
-
-        public void UpdateHistoricalData(string Ticker)
-        {
-            var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
-
-            string query = String.Format("SELECT MAX(DayDate) AS DayDate FROM HistoricalData WHERE Ticker=\'{0}\'", Ticker);
-            
-            List<HistoricalStockObject> result = DatabaseReader.Reader.ReadFromDatabase<HistoricalStockObject>(query);
-
-            if (result.Count == 0 || DateTime.Parse(result[0].DayDate) < DateTime.Parse(yesterday))
+            foreach (var list in data)
             {
-                Console.WriteLine("Updating "+Ticker);
-                List<ServerHistoricalStockObject> list = JsonToStockObject.Json.CreateHistoricalStockObjects(Ticker, "1m");
                 StockObjectToDatabase.Database.UpdateHistoricalData(list, false);
             }
-            
+            */
+            Console.WriteLine("DISABLED!");
         }
     }
 }
